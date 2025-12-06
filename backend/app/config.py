@@ -36,10 +36,15 @@ class Settings(BaseSettings):
     
     # Image Validation
     MAX_IMAGE_SIZE_MB: int = 10
-    ALLOWED_IMAGE_FORMATS: list = ["jpg", "jpeg", "png", "webp"]
+    ALLOWED_IMAGE_FORMATS: str = "jpg,jpeg,png,webp"
     MIN_ASPECT_RATIO: float = 0.5
     MAX_ASPECT_RATIO: float = 2.0
     MIN_RESOLUTION: int = 300
+    
+    @property
+    def allowed_formats_list(self) -> list:
+        """Return allowed formats as a list"""
+        return [fmt.strip() for fmt in self.ALLOWED_IMAGE_FORMATS.split(",")]
     
     # Quality Thresholds
     MIN_QUALITY_SCORE: float = 0.6

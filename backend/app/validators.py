@@ -13,11 +13,12 @@ def validate_image_format(image: Image.Image, filename: str) -> str:
     """Validate image format is allowed"""
     format_lower = image.format.lower() if image.format else ""
     extension = filename.split(".")[-1].lower() if "." in filename else ""
+    allowed_formats = settings.allowed_formats_list
     
     # Check format
-    if format_lower not in settings.ALLOWED_IMAGE_FORMATS and extension not in settings.ALLOWED_IMAGE_FORMATS:
+    if format_lower not in allowed_formats and extension not in allowed_formats:
         raise ValidationError(
-            f"Invalid image format. Allowed formats: {', '.join(settings.ALLOWED_IMAGE_FORMATS)}"
+            f"Invalid image format. Allowed formats: {', '.join(allowed_formats)}"
         )
     
     return format_lower or extension

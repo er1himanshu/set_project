@@ -248,7 +248,7 @@ async def get_config():
     """
     return ConfigResponse(
         max_image_size_mb=settings.MAX_IMAGE_SIZE_MB,
-        allowed_formats=settings.ALLOWED_IMAGE_FORMATS,
+        allowed_formats=settings.allowed_formats_list,
         min_aspect_ratio=settings.MIN_ASPECT_RATIO,
         max_aspect_ratio=settings.MAX_ASPECT_RATIO,
         min_resolution=settings.MIN_RESOLUTION,
