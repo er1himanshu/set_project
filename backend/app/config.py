@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     MIN_RESOLUTION: int = 300
     
     @property
-    def allowed_formats_list(self) -> list:
+    def allowed_formats_list(self) -> list[str]:
         """Return allowed formats as a list"""
         return [fmt.strip() for fmt in self.ALLOWED_IMAGE_FORMATS.split(",")]
     

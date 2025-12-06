@@ -2,6 +2,8 @@
 
 A modern end-to-end solution for image quality analysis, compliance checking, and duplicate detection for e-commerce platforms.
 
+![System Status](https://github.com/user-attachments/assets/99c2a952-5a4c-4b9c-8d2f-6aea64095db3)
+
 ## Features
 
 - **Image Upload**: Support for both file upload and URL-based image ingestion
