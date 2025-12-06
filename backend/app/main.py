@@ -16,6 +16,7 @@ from app.schemas import (
 )
 from app.validators import validate_image
 from app.tasks import process_image
+from app.url_validator import is_safe_url
 
 # Create FastAPI app
 app = FastAPI(
@@ -122,10 +123,20 @@ async def upload_image_url(
     
     The image will be downloaded, validated, and queued for asynchronous processing.
     """
+    # Validate URL to prevent SSRF attacks
+    url_str = str(request.url)
+    is_safe, error_msg = is_safe_url(url_str)
+    
+    if not is_safe:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"errors": [error_msg]}
+        )
+    
     # Download image from URL
     try:
         async with httpx.AsyncClient() as client:
-            response = await client.get(str(request.url), timeout=30.0)
+            response = await client.get(url_str, timeout=30.0, follow_redirects=False)
             response.raise_for_status()
             image_bytes = response.content
     except Exception as e:
