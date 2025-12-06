@@ -1,0 +1,52 @@
+version: "3.9"
+services:
+  api:
+    build: ./backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend/app:/code/app
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+
+  worker:
+    build: ./backend
+    command: celery -A app.worker.celery_app worker --loglevel=info
+    volumes:
+      - ./backend/app:/code/app
+    env_file: .env
+    depends_on:
+      - api
+      - redis
+      - db
+
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-imagesvc}
+      POSTGRES_USER: ${POSTGRES_USER:-imagesvc}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-imagesvc}
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  frontend:
+    build: ./frontend
+    command: npm run dev -- --host --port 5173
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "5173:5173"
+    env_file: .env
+    depends_on:
+      - api
