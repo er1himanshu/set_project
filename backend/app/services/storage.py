@@ -36,7 +36,7 @@ class StorageService:
         ]):
             return None
         
-        # Placeholder for Cloudinary upload
+        # TODO: Implement actual Cloudinary upload
         # import cloudinary
         # import cloudinary.uploader
         # 
@@ -49,7 +49,8 @@ class StorageService:
         # result = cloudinary.uploader.upload(file_path, public_id=filename)
         # return result['secure_url']
         
-        return f"cloudinary://placeholder/{filename}"
+        # PLACEHOLDER: Return mock URL until Cloudinary is implemented
+        return f"TODO-cloudinary://placeholder/{filename}"
     
     @staticmethod
     def save_to_s3(file_path: str, filename: str) -> Optional[str]:
@@ -65,7 +66,7 @@ class StorageService:
         ]):
             return None
         
-        # Placeholder for S3 upload
+        # TODO: Implement actual S3 upload
         # import boto3
         # 
         # s3_client = boto3.client(
@@ -78,7 +79,8 @@ class StorageService:
         # s3_client.upload_file(file_path, settings.AWS_S3_BUCKET, filename)
         # return f"s3://{settings.AWS_S3_BUCKET}/{filename}"
         
-        return f"s3://placeholder/{filename}"
+        # PLACEHOLDER: Return mock URL until S3 is implemented
+        return f"TODO-s3://placeholder/{filename}"
     
     @classmethod
     def save_image(cls, file_path: str, filename: str) -> str:

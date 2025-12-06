@@ -26,8 +26,9 @@ class QualityAnalyzer:
         width, height = image.size
         total_pixels = width * height
         
-        # Check resolution
-        if total_pixels < settings.MIN_RESOLUTION_THRESHOLD ** 2:
+        # Check resolution against minimum threshold (squared to get total pixel count)
+        min_total_pixels = settings.MIN_RESOLUTION_THRESHOLD ** 2  # e.g., 500^2 = 250,000 pixels
+        if total_pixels < min_total_pixels:
             reasons.append("Low resolution")
         
         # Check dimensions
