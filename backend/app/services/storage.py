@@ -50,7 +50,8 @@ class StorageService:
         # return result['secure_url']
         
         # PLACEHOLDER: Return mock URL until Cloudinary is implemented
-        return f"TODO-cloudinary://placeholder/{filename}"
+        # Using placeholder:// scheme to prevent accidental use as valid URL
+        return f"placeholder://cloudinary/{filename}"
     
     @staticmethod
     def save_to_s3(file_path: str, filename: str) -> Optional[str]:
@@ -80,7 +81,8 @@ class StorageService:
         # return f"s3://{settings.AWS_S3_BUCKET}/{filename}"
         
         # PLACEHOLDER: Return mock URL until S3 is implemented
-        return f"TODO-s3://placeholder/{filename}"
+        # Using placeholder:// scheme to prevent accidental use as valid URL
+        return f"placeholder://s3/{filename}"
     
     @classmethod
     def save_image(cls, file_path: str, filename: str) -> str:
