@@ -66,6 +66,9 @@ class Settings(BaseSettings):
     MAX_WIDTH: int = 8000
     MAX_HEIGHT: int = 8000
     ALLOWED_FORMATS: list = ["JPEG", "PNG", "WEBP", "GIF"]
+    ALLOWED_FORMATS: List = ["JPG", "JPEG", "PNG", "WEBP", "GIF"]
+
+    
     
     # Quality thresholds (placeholder values)
     MIN_QUALITY_SCORE: float = 0.6
